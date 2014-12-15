@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/MGDIS/simple-bam.svg?branch=master)](https://travis-ci.org/MGDIS/simple-bam)
 [![Code Climate](https://codeclimate.com/github/MGDIS/simple-bam/badges/gpa.svg)](https://codeclimate.com/github/MGDIS/simple-bam)
+[![Coverage Status](https://coveralls.io/repos/MGDIS/simple-bam/badge.png)](https://coveralls.io/r/MGDIS/simple-bam)
 
 *Resources and tools using node.js and elasticsearch to help build a simple Business Activity Monitoring service.*
 
