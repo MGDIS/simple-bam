@@ -1,6 +1,6 @@
 # Simple BAM
 
-**Resources and tools using node.js and elasticsearch to help build a simple Business Activity Monitoring service.**
+*Resources and tools using node.js and elasticsearch to help build a simple Business Activity Monitoring service.*
 
 **Disclaimer: this is a work in progress. Come back later !**
 
