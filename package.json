@@ -4,7 +4,9 @@
   "description": "Resources and tools using node.js and elasticsearch to help build a simple Business Activity Monitoring service",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "mocha",
+    "test-cover": "istanbul cover _mocha",
+    "test-coveralls": "istanbul cover _mocha && istanbul-coveralls"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,8 @@
     "lodash-deep": "~1.4.2"
   },
   "devDependencies": {
+    "istanbul": "^0.3.5",
+    "istanbul-coveralls": "^1.0.1",
     "mocha": "~2.0.1",
     "nock": "^0.52.0",
     "should": "~4.3.0"
