@@ -1,0 +1,152 @@
+{
+  "definitions": {
+    "wwwmgdisfrpublicbusinessactivitymonitoring:VersionType": {
+      "pattern": "[0-9]+\\.[0-9]+\\.[0-9]+(\\-.*)?",
+      "type": "string"
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:Category": {
+      "pattern": ".{0,128}",
+      "type": "string"
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:instanceId": {
+      "pattern": ".{0,128}",
+      "type": "string"
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:severity": {
+      "minimum": 0,
+      "exclusiveMinimum": false,
+      "maximum": 70,
+      "exclusiveMaximum": false,
+      "type": "integer"
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:priority": {
+      "minimum": 0,
+      "exclusiveMinimum": false,
+      "maximum": 100,
+      "exclusiveMaximum": false,
+      "type": "integer"
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:message": {
+      "minLength": 0,
+      "maxLength": 1024,
+      "type": "string"
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:executionEnvironment": {
+      "pattern": ".{0,256}",
+      "type": "string"
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:EventType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "reportTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:VersionType"
+        },
+        "location": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:location"
+        },
+        "origin": {
+          "type": "string",
+          "format": "uri"
+        },
+        "reporter": {
+          "type": "string",
+          "format": "uri"
+        },
+        "situation": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:SituationType"
+        },
+        "correlation": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:CorrelatorPropertiesType"
+        }
+      },
+      "required": [
+        "reportTime",
+        "version",
+        "origin",
+        "situation",
+        "correlation"
+      ]
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:CorrelatorPropertiesType": {
+      "required": [
+        "id",
+        "tenantId",
+        "userId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "application": {
+          "type": "string",
+          "format": "uri"
+        },
+        "instanceId": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:instanceId"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "processId": {
+          "type": "string"
+        },
+        "threadId": {
+          "type": "string"
+        }
+      }
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:SituationType": {
+      "required": [
+        "category",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:Category"
+        },
+        "severity": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:severity"
+        },
+        "priority": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:priority"
+        },
+        "message": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:message"
+        },
+        "executionEnvironment": {
+          "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:executionEnvironment"
+        }
+      }
+    },
+    "wwwmgdisfrpublicbusinessactivitymonitoring:location": {
+      "required": [
+        "longitude",
+        "latitude"
+      ],
+      "type": "object",
+      "properties": {
+        "longitude": {
+          "type": "xs:long"
+        },
+        "latitude": {
+          "type": "xs:long"
+        }
+      }
+    }
+  },
+  "$ref": "#/definitions/wwwmgdisfrpublicbusinessactivitymonitoring:EventType"
+}

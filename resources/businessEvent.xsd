@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema targetNamespace="http://www.mgdis.fr/public/business-activity-monitoring"
+ xmlns:s="http://www.w3.org/2001/XMLSchema"
+ xmlns:tns="http://www.mgdis.fr/public/business-activity-monitoring" elementFormDefault="qualified">
+ <s:element name="event" type="tns:EventType">
+  <s:annotation>
+   <s:documentation source="https://www.oasis-open.org/committees/wsdm/" xml:lang="EN">Inspired by the Web Services Distributed Management Standard of OASIS</s:documentation>
+  </s:annotation>
+ </s:element>
+ <s:complexType name="EventType">
+  <s:sequence>
+   <s:element name="id" type="s:anyURI" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> This is meta-data. This is the
+      primary identifier for the event. This property MUST be
+      globally unique and MAY be used as the primary key for the
+      event. This property is provided for management functions
+      that require events to have an identifier. Once this value
+      is set it MUST NOT be changed. The RECOMMENDED value is a
+      Globally Unique Id. This is an REQUIRED property.
+     </s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="reportTime" type="s:dateTime">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> This is meta-data. The date-time
+      when the event was issued. The value MUST be an UTC date time. The value MUST provide granularity as
+      precisely as the generating platform allows. This is a
+      REQUIRED property. </s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="version" type="tns:VersionType" default="1.0.0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> A string identifying the version
+      of this event. This is an OPTIONAL property.
+     </s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="location" minOccurs="0">
+    <s:annotation>
+     <s:documentation>Location information for distant devices and systems.</s:documentation>
+    </s:annotation>
+    <s:complexType>
+     <s:annotation>
+      <s:documentation xml:lang="EN"> This is meta-data. This property
+							is provided for location functions. This property is used when a component wants the
+							geographical location of the event. This point is LongLat long like geoJSON. 
+							This is an OPTIONAL property.</s:documentation>
+     </s:annotation>
+     <s:sequence>
+      <s:element name="longitude" type="s:long"/>
+      <s:element name="latitude" type="s:long"/>
+     </s:sequence>
+    </s:complexType>
+   </s:element>
+   <s:element name="origin" type="s:anyURI">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> Identification of the
+						component that is the origin of the event.
+					</s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="reporter" type="s:anyURI" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> Identification of the
+						component that is the “reporter” of the event. Can be
+						null if it is the same as origin. </s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="situation" type="tns:SituationType">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> This field provides critical
+						data about the event, including the situation category,
+						which will be used by management functions. This is a
+						REQUIRED property. </s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="correlation" type="tns:CorrelatorPropertiesType" minOccurs="1">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> An array of contexts that
+						this event is referencing. This is an REQUIRED property.
+					</s:documentation>
+    </s:annotation>
+   </s:element>
+  </s:sequence>
+ </s:complexType>
+ <s:simpleType name="VersionType">
+  <s:restriction base="s:string">
+   <s:pattern value="[0-9]+\.[0-9]+\.[0-9]+(\-.*)?"/>
+  </s:restriction>
+ </s:simpleType>
+ <s:complexType name="CorrelatorPropertiesType">
+  <s:all>
+   <s:element name="id" type="s:anyURI">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> Identification of the
+						subject that is concern by this event. This is a
+						REQUIRED property. </s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="tenantId" type="s:string">
+    <s:annotation>
+     <s:documentation xml:lang="EN">Identification of the tenant in which this event has been emitted.</s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="userId" type="s:string">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> Identification of the user who emits this event.</s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="application" type="s:anyURI" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> For some legacy systems, the
+                        component is associated with an application name. This
+                        application name is usually something like “myWebApp” or
+                        “flowersByWebApp:. The application version information
+                        MAY be appended to the end of the component separated by
+                        a # character (e.g., maWebApp#4.5.1). This is an
+                        OPTIONAL property. The maximum string length for
+                        application MUST NOT exceed 256 characters.
+                    </s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="instanceId" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> Specifies a handle or
+                        identifier for the instance of the component that is
+                        specified by the component property (e.g., Grid Service
+                        Handle(GSH) or EJBHandle). This is an OPTIONAL property.
+                        The maximum string length for instanceId MUST NOT exceed
+                        128 characters. </s:documentation>
+    </s:annotation>
+    <s:simpleType>
+     <s:restriction base="s:string">
+      <s:pattern value=".{0,128}"/>
+     </s:restriction>
+    </s:simpleType>
+   </s:element>
+   <s:element name="processId" type="s:string" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> This property identifies the
+						process ID of the running component or subcomponent that
+						generated the event. This is an OPTIONAL property with
+						no default value. The maximum string length for
+						processId MUST NOT exceed 64 characters.
+					</s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="threadId" type="s:string" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> This property identifies the
+						thread ID of the component or subcomponent that
+						generated the event. This value changes with every new
+						thread spawned by the process identified by processId.
+						This is an OPTIONAL property with no default value. The
+						maximum string length for threadId MUST NOT exceed 64
+						characters. </s:documentation>
+    </s:annotation>
+   </s:element>
+  </s:all>
+ </s:complexType>
+ <s:complexType name="SituationType">
+  <s:sequence>
+   <s:element name="category" type="tns:Category">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> This property categorizes
+						the type of the situation that caused the event to be
+						reported. This is a REQUIRED property and once it is set
+						it MUST NOT change. </s:documentation>
+    </s:annotation>
+   </s:element>
+   <s:element name="severity" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> The perceived severity of
+						the status the event is describing with respect to the
+						application that reports the event. This field is
+						provided for management functions that require an event
+						to have a severity. The predefined severity levels, in
+						order of increasing severity, are as follows: • 0
+						Unknown • 10 Information MUST be used for cases when the
+						event contains only general information and is not
+						reporting an error. • 20 Harmless MUST be used for cases
+						in which the error event has no effect on the normal
+						operation of the resource. • 30 Warning MUST be used
+						when it is appropriate to let the user decide if an
+						action is needed in response to the event. • 40 Minor
+						MUST be used to indicate that action is needed, but the
+						situation is not serious at this time. • 50 Critical
+						MUST be used to indicate that an immediate action is
+						needed and the scope is broad (perhaps an imminent
+						outage to a critical resource will result). • 60 Fatal
+						MUST be used to indicate that an error occurred, but it
+						is too late to take remedial action. The associated
+						values are 0 to 70. The reserved values start at 0 for
+						Unknown and increase by increments of 10 to 60 for
+						Fatal. Other severities MAY be added but MUST NOT exceed
+						70. This is an OPTIONAL property. </s:documentation>
+    </s:annotation>
+    <s:simpleType>
+     <s:restriction base="s:integer">
+      <s:minInclusive value="0"/>
+      <s:maxInclusive value="70"/>
+     </s:restriction>
+    </s:simpleType>
+   </s:element>
+   <s:element name="priority" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> This property defines the
+						importance of the event. This field is provided for
+						management functions that require an event to have a
+						priority. The predefined priorities are: • 10 Low • 50
+						Medium • 70 High The values are 0 to 100. The reserved
+						value for Low is 10, for Medium is 50, and for High is
+						70. Other priorities MAY be added but MUST NOT exceed
+						100. This is an OPTIONAL property. </s:documentation>
+    </s:annotation>
+    <s:simpleType>
+     <s:restriction base="s:integer">
+      <s:minInclusive value="0"/>
+      <s:maxInclusive value="100"/>
+     </s:restriction>
+    </s:simpleType>
+   </s:element>
+   <s:element name="message">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> The text accompanying the
+						event. This is typically the resolved message string in
+						human readable format rendered for a specific locale.
+						This is and OPTIONAL property. The maximum string length
+						for msg MUST NOT exceed 1024 characters.
+					</s:documentation>
+    </s:annotation>
+    <s:simpleType>
+     <s:restriction base="s:string">
+      <s:minLength value="0"/>
+      <s:maxLength value="1024"/>
+     </s:restriction>
+    </s:simpleType>
+   </s:element>
+   <s:element name="executionEnvironment" minOccurs="0">
+    <s:annotation>
+     <s:documentation xml:lang="EN"> This property identifies the
+                        immediate environment that an application is running in.
+                        For example, a testing environment Server for MyWebApp:
+                        testing:MyWebApp:Server. The executionEnvironment
+                        version information may be appended to the end of the
+                        component separated by a # character. This is an
+                        OPTIONAL property. The maximum string length for
+                        executionEnvironment MUST NOT exceed 256 characters.
+                    </s:documentation>
+    </s:annotation>
+    <s:simpleType>
+     <s:restriction base="s:string">
+      <s:pattern value=".{0,256}"/>
+     </s:restriction>
+    </s:simpleType>
+   </s:element>
+   <s:any id="context" minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax"/>
+  </s:sequence>
+  <!--
+		<s:assert id="severityAssert"
+			test="( 0 &lt;= severity or severity &lt;= 70)"/>
+		<s:assert id="priorityAssert"
+			test="( 0 &lt;= severity or severity &lt;= 100)"/>
+			-->
+ </s:complexType>
+ <s:simpleType name="Category">
+   <s:restriction base="s:string">
+   <s:pattern value=".{0,128}"/>
+   </s:restriction>
+ </s:simpleType>
+</s:schema>

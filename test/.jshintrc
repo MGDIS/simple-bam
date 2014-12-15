@@ -1,0 +1,10 @@
+{
+	"globals": {
+	    /* MOCHA */
+	    "describe": false,
+	    "before":false,
+	    "after":false,
+	    "it":false,
+	    "srcPath":false
+  	}
+}

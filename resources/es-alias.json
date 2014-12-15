@@ -1,0 +1,8 @@
+{
+	"actions": [{
+		"add": {
+			"index": "businessevents-*",
+			"alias": "businessevents"
+		}
+	}]
+}

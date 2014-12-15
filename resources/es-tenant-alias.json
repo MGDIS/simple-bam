@@ -1,0 +1,13 @@
+{
+	"actions": [{
+		"add": {
+			"index": "businessevents-*",
+			"alias": "TENANTID-businessevents",
+			"filter": {
+				"term": {
+					"correlation.tenantId": "TENANTID"
+				}
+			}
+		}
+	}]
+}

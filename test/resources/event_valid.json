@@ -1,0 +1,14 @@
+{
+	"reportTime": "2014-12-04T12:25:00.843Z",
+	"version": "0.0.0",
+	"origin": "eventOrigin",
+	"situation": {
+		"category": "category",
+		"message": "message"
+	},
+	"correlation": {
+		"id": "id",
+		"tenantId": "tenantTest",
+		"userId": "user"
+	}
+}
