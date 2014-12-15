@@ -1,10 +1,13 @@
 var should = require('should');
 var request = require('request');
+var nock = require('nock');
 
 var elasticsearch = require('../lib/elasticsearch');
 
 var eventValid = require('./resources/event_valid.json');
-var url = 'http://localhost:9200'
+var url = 'http://localhost:9200';
+
+
 
 describe('elasticsearch connector', function() {
 
@@ -24,10 +27,10 @@ describe('elasticsearch connector', function() {
 
 	});
 
-	describe('createTenantAlias function', function(){
+	describe('createTenantAlias function', function() {
 
-		it('should create a filtered alias per tenant', function(callback){
-			elasticsearch.createTenantAlias(url, 'tenantTest', function(err){
+		it('should create a filtered alias per tenant', function(callback) {
+			elasticsearch.createTenantAlias(url, 'tenantTest', function(err) {
 				should.not.exist(err);
 
 				request(url + '/tenantTest-businessevents', function(err, response) {

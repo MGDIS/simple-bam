@@ -1,0 +1,179 @@
+[
+    {
+        "scope": "http://localhost:9200",
+        "method": "POST",
+        "path": "/_aliases",
+        "body": {
+            "actions": [
+                {
+                    "add": {
+                        "index": "businessevents-*",
+                        "alias": "businessevents"
+                    }
+                }
+            ]
+        },
+        "status": 200,
+        "response": {
+            "acknowledged": true
+        },
+        "headers": {
+            "content-type": "application/json; charset=UTF-8",
+            "content-length": "21"
+        }
+    },
+    {
+        "scope": "http://localhost:9200",
+        "method": "PUT",
+        "path": "/_template/businessevents",
+        "body": {
+            "template": "businessevents-*",
+            "mappings": {
+                "businessEvent": {
+                    "properties": {
+                        "correlation": {
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "index": "not_analyzed"
+                                },
+                                "tenantId": {
+                                    "type": "string",
+                                    "index": "not_analyzed"
+                                },
+                                "userId": {
+                                    "type": "string",
+                                    "index": "not_analyzed"
+                                }
+                            }
+                        },
+                        "origin": {
+                            "type": "multi_field",
+                            "fields": {
+                                "origin": {
+                                    "type": "string",
+                                    "index": "analyzed"
+                                },
+                                "raw": {
+                                    "type": "string",
+                                    "index": "not_analyzed"
+                                }
+                            }
+                        },
+                        "reportTime": {
+                            "type": "date",
+                            "format": "dateOptionalTime"
+                        },
+                        "situation": {
+                            "properties": {
+                                "category": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "version": {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        }
+                    }
+                }
+            }
+        },
+        "status": 200,
+        "response": {
+            "acknowledged": true
+        },
+        "headers": {
+            "content-type": "application/json; charset=UTF-8",
+            "content-length": "21"
+        }
+    },
+    {
+        "scope": "http://localhost:9200",
+        "method": "GET",
+        "path": "/businessevents",
+        "body": "",
+        "status": 200,
+        "response": {
+            "businessevents-2014-11-1": {
+                "settings": {
+                    "index": {
+                        "creation_date": "1418042875018",
+                        "uuid": "wYcReX7kQn6-y19rNv31dg",
+                        "number_of_replicas": "1",
+                        "number_of_shards": "5",
+                        "version": {
+                            "created": "1040099"
+                        }
+                    }
+                },
+                "mappings": {
+                    "businessEvent": {
+                        "properties": {
+                            "correlation": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "tenantId": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "userId": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    }
+                                }
+                            },
+                            "origin": {
+                                "type": "string",
+                                "fields": {
+                                    "raw": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    }
+                                }
+                            },
+                            "reportTime": {
+                                "type": "date",
+                                "format": "dateOptionalTime"
+                            },
+                            "situation": {
+                                "properties": {
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "version": {
+                                "type": "string",
+                                "index": "not_analyzed"
+                            }
+                        }
+                    }
+                },
+                "aliases": {
+                    "tenantTest-businessevents": {
+                        "filter": {
+                            "term": {
+                                "correlation.tenantId": "tenantTest"
+                            }
+                        }
+                    },
+                    "businessevents": {}
+                }
+            }
+        },
+        "headers": {
+            "content-type": "application/json; charset=UTF-8",
+            "content-length": "819"
+        }
+    }
+]
