@@ -35,6 +35,7 @@
     "istanbul-coveralls": "^1.0.1",
     "mocha": "~2.0.1",
     "nock": "^0.52.0",
-    "should": "~4.3.0"
+    "should": "~4.3.0",
+    "timekeeper": "0.0.5"
   }
 }

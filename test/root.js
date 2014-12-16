@@ -2,6 +2,11 @@
 
 var fs = require('fs');
 var nock = require('nock');
+var tk = require('timekeeper');
+
+// freeze time so that time-based indexes do not change in the tests data
+var time = new Date(1418042875018);
+tk.freeze(time);
 
 if (process.env.NOCK_OFF && process.env.NOCK_RECORD) {
 	// If HTTP mocks using Nock are disabled and recording is asked for using environement variables
