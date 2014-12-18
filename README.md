@@ -33,7 +33,7 @@ Run with code coverage:
 
 ## Updating the contract
 
-In the sandbox with mgdis/contract.git and simple-bam cloned:
+First modify the XSD schema, which is for now the reference document. Then transform it into a JSON schema.
 
-    cp ./contract/business-activity-monitoring/businessEvent.xsd ./simple-bam/resources/
-    ./node-xsd2json/bin/xsd2json -v -o ./simple-bam/resources/business-event-schema.json ./simple-bam/resources/businessEvent.xsd
+    npm install -g xsd2json2
+    xsd2json2 -v -o ./resources/business-event-schema.json ./resources/businessEvent.xsd

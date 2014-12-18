@@ -10,8 +10,9 @@ var url = 'http://localhost:' + config.port;
 
 describe('demo server', function() {
 
-	before(app.run);
 	after(app.shutdown);
+
+	it('should be executable', app.run);
 
 	it('should support creating a tenant', function(callback) {
 		request.put(url + '/mytenant', function(err, response) {
