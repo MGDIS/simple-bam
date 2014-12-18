@@ -1,13 +1,10 @@
 var should = require('should');
 var request = require('request');
-var nock = require('nock');
 
 var elasticsearch = require('../lib/elasticsearch');
 
 var eventValid = require('./resources/event_valid.json');
 var url = 'http://localhost:9200';
-
-
 
 describe('elasticsearch connector', function() {
 
@@ -46,8 +43,10 @@ describe('elasticsearch connector', function() {
 	describe('index function', function() {
 
 		it('should index an event object', function(callback) {
-			elasticsearch.index('http://localhost:9200', eventValid, function(err) {
+			elasticsearch.index('http://localhost:9200', eventValid, function(err, indexedEvent) {
 				should.not.exist(err);
+				should.exist(indexedEvent);
+				indexedEvent.should.have.property('id');
 				callback();
 			});
 		});

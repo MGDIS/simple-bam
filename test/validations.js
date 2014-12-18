@@ -41,8 +41,11 @@ describe('businessEvent schema validation middleware', function() {
 		};
 
 		var res = {
-			send: function(code, errs){
+			status: function(code) {
 				code.should.equal(400);
+				return res;
+			},
+			send: function(errs){
 				errs.should.have.lengthOf(1);
 				callback();
 			}

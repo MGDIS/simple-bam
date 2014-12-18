@@ -1,9 +1,14 @@
 {
+	"node": true,
+	"unused": true,
+	"undef": true,
 	"globals": {
 	    /* MOCHA */
 	    "describe": false,
 	    "before":false,
 	    "after":false,
+	    "beforeEach":false,
+	    "afterEach":false,
 	    "it":false,
 	    "srcPath":false
   	}

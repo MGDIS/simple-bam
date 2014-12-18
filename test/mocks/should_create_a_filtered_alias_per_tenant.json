@@ -35,16 +35,22 @@
         "status": 200,
         "response": {
             "businessevents-2014-11-1": {
-                "settings": {
-                    "index": {
-                        "creation_date": "1418042875018",
-                        "uuid": "wYcReX7kQn6-y19rNv31dg",
-                        "number_of_replicas": "1",
-                        "number_of_shards": "5",
-                        "version": {
-                            "created": "1040099"
+                "aliases": {
+                    "tenantTest-businessevents": {
+                        "filter": {
+                            "term": {
+                                "correlation.tenantId": "tenantTest"
+                            }
                         }
-                    }
+                    },
+                    "mytenant-businessevents": {
+                        "filter": {
+                            "term": {
+                                "correlation.tenantId": "mytenant"
+                            }
+                        }
+                    },
+                    "businessevents": {}
                 },
                 "mappings": {
                     "businessEvent": {
@@ -95,6 +101,19 @@
                         }
                     }
                 },
+                "settings": {
+                    "index": {
+                        "creation_date": "1418908678280",
+                        "uuid": "KmBFpdzXTASphtJCiTve6g",
+                        "number_of_replicas": "1",
+                        "number_of_shards": "5",
+                        "version": {
+                            "created": "1040299"
+                        }
+                    }
+                }
+            },
+            "businessevents-2014-11-4": {
                 "aliases": {
                     "tenantTest-businessevents": {
                         "filter": {
@@ -103,13 +122,80 @@
                             }
                         }
                     },
+                    "mytenant-businessevents": {
+                        "filter": {
+                            "term": {
+                                "correlation.tenantId": "mytenant"
+                            }
+                        }
+                    },
                     "businessevents": {}
+                },
+                "mappings": {
+                    "businessEvent": {
+                        "properties": {
+                            "correlation": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "tenantId": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "userId": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    }
+                                }
+                            },
+                            "origin": {
+                                "type": "string",
+                                "fields": {
+                                    "raw": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    }
+                                }
+                            },
+                            "reportTime": {
+                                "type": "date",
+                                "format": "dateOptionalTime"
+                            },
+                            "situation": {
+                                "properties": {
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "version": {
+                                "type": "string",
+                                "index": "not_analyzed"
+                            }
+                        }
+                    }
+                },
+                "settings": {
+                    "index": {
+                        "creation_date": "1418908690484",
+                        "uuid": "9efMvaYtTdSXgj4DFUxLUw",
+                        "number_of_replicas": "1",
+                        "number_of_shards": "5",
+                        "version": {
+                            "created": "1040299"
+                        }
+                    }
                 }
             }
         },
         "headers": {
             "content-type": "application/json; charset=UTF-8",
-            "content-length": "819"
+            "content-length": "1801"
         }
     }
 ]

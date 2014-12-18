@@ -27,6 +27,10 @@ Run with code coverage:
 
     npm run-script test-cover
 
+## Running the demonstration server
+
+    npm start
+
 ## Updating the contract
 
 In the sandbox with mgdis/contract.git and simple-bam cloned:
