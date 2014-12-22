@@ -43,14 +43,53 @@ describe('elasticsearch connector', function() {
 	describe('index function', function() {
 
 		it('should index an event object', function(callback) {
-			elasticsearch.index('http://localhost:9200', eventValid, function(err, indexedEvent) {
+			elasticsearch.index(url, eventValid, function(err, indexedEvent) {
 				should.not.exist(err);
 				should.exist(indexedEvent);
 				indexedEvent.should.have.property('id');
 				callback();
 			});
 		});
-
 	});
 
+	describe('BulkIndexer object', function() {
+		var bulkIndexer = null;
+		beforeEach('should be initialized by the bulkIndexer function', function() {
+			bulkIndexer = elasticsearch.bulkIndexer(url, 10, 10);
+			bulkIndexer.index.should.be.of.type('function');
+		});
+
+		it('should receive a businessEvent to index and flush it', function(callback) {
+			bulkIndexer.once('flush', function(nbFlushed) {
+				nbFlushed.should.equal(1);
+				callback();
+			});
+
+			bulkIndexer.index(eventValid);
+			bulkIndexer.flush();
+		});
+
+		it('should flush automatically when max buffer length is attained', function(callback) {
+			bulkIndexer.once('flush', function(nbFlushed) {
+				nbFlushed.should.equal(10);
+				callback();
+			});
+
+			for (var i = 0; i < 10; i++) {
+				bulkIndexer.index(eventValid);
+			}
+
+		});
+
+		it('should flush automatically when delay is attained', function(callback) {
+			bulkIndexer.once('flush', function(nbFlushed) {
+				nbFlushed.should.equal(2);
+				callback();
+			});
+
+			bulkIndexer.index(eventValid);
+			bulkIndexer.index(eventValid);
+		});
+
+	});
 });

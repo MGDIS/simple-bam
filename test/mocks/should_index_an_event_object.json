@@ -1,9 +1,10 @@
 [
     {
         "scope": "http://localhost:9200",
-        "method": "POST",
-        "path": "/businessevents-2014-11-1/businessEvent",
+        "method": "PUT",
+        "path": "/businessevents-2014-11-1/businessEvent/1",
         "body": {
+            "id": "1",
             "reportTime": "2014-12-04T12:25:00.843Z",
             "version": "0.0.0",
             "origin": "eventOrigin",
@@ -17,17 +18,17 @@
                 "userId": "user"
             }
         },
-        "status": 201,
+        "status": 200,
         "response": {
             "_index": "businessevents-2014-11-1",
             "_type": "businessEvent",
-            "_id": "AUpd3T63xcfAsyQuoa8j",
-            "_version": 1,
-            "created": true
+            "_id": "1",
+            "_version": 603,
+            "created": false
         },
         "headers": {
             "content-type": "application/json; charset=UTF-8",
-            "content-length": "118"
+            "content-length": "102"
         }
     }
 ]

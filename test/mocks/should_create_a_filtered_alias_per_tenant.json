@@ -71,6 +71,9 @@
                                     }
                                 }
                             },
+                            "id": {
+                                "type": "string"
+                            },
                             "origin": {
                                 "type": "string",
                                 "fields": {
@@ -195,7 +198,7 @@
         },
         "headers": {
             "content-type": "application/json; charset=UTF-8",
-            "content-length": "1801"
+            "content-length": "1824"
         }
     }
 ]

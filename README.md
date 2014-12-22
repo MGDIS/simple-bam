@@ -27,7 +27,7 @@ Run with code coverage:
 
     npm run-script test-cover
 
-## Running the demonstration server
+## Running the simplest demonstration server
 
     npm start
 

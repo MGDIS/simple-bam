@@ -1,0 +1,5 @@
+{
+	"port": "3031",
+	"elasticsearch": "http://localhost:9200",
+	"mongodb": "mongodb://localhost:27017/simple-bam-test"
+}
