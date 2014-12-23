@@ -39,20 +39,14 @@ app.put('/:tenantId', function(req, res, next) {
 // save it in mongodb and ask for indexing it into elasticsearch in bulk mode
 app.post('/:tenantId/event', bodyParser.json(), bam.validation.middleware, function(req, res, next) {
 	var businessEvent = req.body;
-	businessEvent._id = new mongodb.ObjectID();
-	businessEvent.id = businessEvent._id.toHexString();
-
 	// can safely assume that businessEvent has a correlation key.
 	// it is ensured by the validation middleware
 	businessEvent.correlation.tenantId = req.params.tenantId;
 
-	var eventsCollection = db.collection('business-events');
-
-	eventsCollection.insert(businessEvent, function(err) {
+	bam.mongodb.save(db, businessEvent, new mongodb.ObjectID(), function(err, savedEvent){
 		if (err) return next(err);
-		bulkIndexer.index(businessEvent);
-		delete businessEvent._id;
-		res.status(201).send(businessEvent);
+		bulkIndexer.index(savedEvent);
+		res.status(201).send(savedEvent);
 	});
 
 });

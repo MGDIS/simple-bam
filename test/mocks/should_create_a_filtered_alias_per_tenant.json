@@ -34,6 +34,85 @@
         "body": "",
         "status": 200,
         "response": {
+            "businessevents-2014-11-2": {
+                "aliases": {
+                    "tenantTest-businessevents": {
+                        "filter": {
+                            "term": {
+                                "correlation.tenantId": "tenantTest"
+                            }
+                        }
+                    },
+                    "mytenant-businessevents": {
+                        "filter": {
+                            "term": {
+                                "correlation.tenantId": "mytenant"
+                            }
+                        }
+                    },
+                    "businessevents": {}
+                },
+                "mappings": {
+                    "businessEvent": {
+                        "properties": {
+                            "correlation": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "tenantId": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    },
+                                    "userId": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    }
+                                }
+                            },
+                            "origin": {
+                                "type": "string",
+                                "fields": {
+                                    "raw": {
+                                        "type": "string",
+                                        "index": "not_analyzed"
+                                    }
+                                }
+                            },
+                            "reportTime": {
+                                "type": "date",
+                                "format": "dateOptionalTime"
+                            },
+                            "situation": {
+                                "properties": {
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "version": {
+                                "type": "string",
+                                "index": "not_analyzed"
+                            }
+                        }
+                    }
+                },
+                "settings": {
+                    "index": {
+                        "creation_date": "1419347603904",
+                        "uuid": "IYmLAN-rRFO5MslOZLjdmQ",
+                        "number_of_replicas": "1",
+                        "number_of_shards": "5",
+                        "version": {
+                            "created": "1040299"
+                        }
+                    }
+                }
+            },
             "businessevents-2014-11-1": {
                 "aliases": {
                     "tenantTest-businessevents": {
@@ -198,7 +277,7 @@
         },
         "headers": {
             "content-type": "application/json; charset=UTF-8",
-            "content-length": "1824"
+            "content-length": "2724"
         }
     }
 ]
