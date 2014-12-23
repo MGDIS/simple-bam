@@ -12,7 +12,7 @@
 var bam = require('../');
 var express = require('express');
 var bodyParser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
+var mongodb = require('mongodb');
 var async = require('async');
 
 var config = require('./config');
@@ -39,6 +39,8 @@ app.put('/:tenantId', function(req, res, next) {
 // save it in mongodb and ask for indexing it into elasticsearch in bulk mode
 app.post('/:tenantId/event', bodyParser.json(), bam.validation.middleware, function(req, res, next) {
 	var businessEvent = req.body;
+	businessEvent._id = new mongodb.ObjectID();
+	businessEvent.id = businessEvent._id.toHexString();
 
 	// can safely assume that businessEvent has a correlation key.
 	// it is ensured by the validation middleware
@@ -46,13 +48,11 @@ app.post('/:tenantId/event', bodyParser.json(), bam.validation.middleware, funct
 
 	var eventsCollection = db.collection('business-events');
 
-	eventsCollection.insert(businessEvent, function(err, result) {
+	eventsCollection.insert(businessEvent, function(err) {
 		if (err) return next(err);
-		var savedEvent = result[0];
-		savedEvent.id = savedEvent._id;
-		delete savedEvent._id;
-		bulkIndexer.index(savedEvent);
-		res.status(201).send(savedEvent);
+		bulkIndexer.index(businessEvent);
+		delete businessEvent._id;
+		res.status(201).send(businessEvent);
 	});
 
 });
@@ -61,7 +61,7 @@ exports.app = app;
 
 // Some asynchronous init and shutdown functions
 var prepareMongo = function(callback) {
-	MongoClient.connect(config.mongodb, callback);
+	mongodb.MongoClient.connect(config.mongodb, callback);
 };
 var prepareES = function(callback) {
 	bam.elasticsearch.configure(config.elasticsearch, callback);

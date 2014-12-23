@@ -26,20 +26,5 @@
             "content-type": "application/json; charset=UTF-8",
             "content-length": "21"
         }
-    },
-    {
-        "scope": "http://localhost:3031",
-        "method": "PUT",
-        "path": "/mytenant",
-        "body": "",
-        "status": 200,
-        "response": "OK",
-        "headers": {
-            "x-powered-by": "Express",
-            "content-type": "text/plain; charset=utf-8",
-            "content-length": "2",
-            "date": "Mon, 08 Dec 2014 12:47:55 GMT",
-            "connection": "keep-alive"
-        }
     }
 ]

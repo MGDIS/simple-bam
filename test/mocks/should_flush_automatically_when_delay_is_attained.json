@@ -6,7 +6,7 @@
         "body": "{\"index\":{\"_index\":\"businessevents-2014-11-1\",\"_type\":\"businessEvent\",\"_id\":\"1\"}}\n{\"id\":\"1\",\"reportTime\":\"2014-12-04T12:25:00.843Z\",\"version\":\"0.0.0\",\"origin\":\"eventOrigin\",\"situation\":{\"category\":\"category\",\"message\":\"message\"},\"correlation\":{\"id\":\"id\",\"tenantId\":\"tenantTest\",\"userId\":\"user\"}}\n{\"index\":{\"_index\":\"businessevents-2014-11-1\",\"_type\":\"businessEvent\",\"_id\":\"1\"}}\n{\"id\":\"1\",\"reportTime\":\"2014-12-04T12:25:00.843Z\",\"version\":\"0.0.0\",\"origin\":\"eventOrigin\",\"situation\":{\"category\":\"category\",\"message\":\"message\"},\"correlation\":{\"id\":\"id\",\"tenantId\":\"tenantTest\",\"userId\":\"user\"}}\n",
         "status": 200,
         "response": {
-            "took": 1,
+            "took": 3,
             "errors": false,
             "items": [
                 {
@@ -14,7 +14,7 @@
                         "_index": "businessevents-2014-11-1",
                         "_type": "businessEvent",
                         "_id": "1",
-                        "_version": 615,
+                        "_version": 630,
                         "status": 200
                     }
                 },
@@ -23,7 +23,7 @@
                         "_index": "businessevents-2014-11-1",
                         "_type": "businessEvent",
                         "_id": "1",
-                        "_version": 616,
+                        "_version": 631,
                         "status": 200
                     }
                 }

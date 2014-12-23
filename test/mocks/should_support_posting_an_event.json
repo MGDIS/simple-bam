@@ -1,26 +1,10 @@
 [
     {
-        "scope": "http://localhost:3031",
-        "method": "POST",
-        "path": "/mytenant/event",
+        "scope": "http://localhost:9200",
+        "method": "PUT",
+        "path": "/businessevents-2014-11-1/businessEvent/1",
         "body": {
             "id": "1",
-            "reportTime": "2014-12-04T12:25:00.843Z",
-            "version": "0.0.0",
-            "origin": "eventOrigin",
-            "situation": {
-                "category": "category",
-                "message": "message"
-            },
-            "correlation": {
-                "id": "id",
-                "tenantId": "tenantTest",
-                "userId": "user"
-            }
-        },
-        "status": 201,
-        "response": {
-            "id": "54859dfba7886257544d3824",
             "reportTime": "2014-12-04T12:25:00.843Z",
             "version": "0.0.0",
             "origin": "eventOrigin",
@@ -34,12 +18,17 @@
                 "userId": "user"
             }
         },
+        "status": 200,
+        "response": {
+            "_index": "businessevents-2014-11-1",
+            "_type": "businessEvent",
+            "_id": "1",
+            "_version": 617,
+            "created": false
+        },
         "headers": {
-            "x-powered-by": "Express",
-            "content-type": "application/json; charset=utf-8",
-            "content-length": "234",
-            "date": "Mon, 08 Dec 2014 12:47:55 GMT",
-            "connection": "keep-alive"
+            "content-type": "application/json; charset=UTF-8",
+            "content-length": "102"
         }
     }
 ]
